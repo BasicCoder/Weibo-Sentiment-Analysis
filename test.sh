@@ -1,0 +1,1 @@
+python train_weibo.py --do_train False
