@@ -397,7 +397,7 @@ def test(model, processor, args, label_list, tokenizer, device):
     np.save('score_'+base_filename+'.npy', score)
     np.save('pred_'+base_filename+'.npy', predict)
     f1 = np.mean(metrics.f1_score(predict, gt, average=None))
-    print('F1 score in text set is {}'.format(f1))
+    print('Test set F1 score = {}'.format(f1))
 
     return f1
 
@@ -676,14 +676,14 @@ def main():
             test(model, processor, args, label_list, tokenizer, device)
             if f1 > best_score:
                 best_score = f1
-                print('*f1 score = {}'.format(f1))
+                print('Valid f1 score = {}'.format(f1))
                 flags = 0
                 checkpoint = {
                     'state_dict': model.state_dict()
                 }
                 torch.save(checkpoint, args.model_save_pth)
             else:
-                print('f1 score = {}'.format(f1))
+                print('Valid f1 score = {}'.format(f1))
                 flags += 1
                 if flags >= 6:
                     break
